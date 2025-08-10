@@ -1,22 +1,25 @@
 describe("Swagger Petstore User API", () => {
-   it("create user",()=>{
-    cy.request({
-      method:"POST",
-      url:"https://parasoli.com",
-      body:[{
-        id: 0,
-        username: "paras",
-        firstName: "paras",
-        lastName: "oli",
-        email: "paras.oli@gmail.com",
-        password: "paras",
-        phone: "9868757379",
-        userStatus: 0
-      }]
-    }).then((response)=>{
-      expect(response.status).to.oneOf(['200','201'])
-    })
-   })
+    it("Create users with list input", () => {
+      cy.request({
+        method: "POST",
+        url: "https://petstore.swagger.io/v2/user/createWithList",
+        body: [
+          {
+            id: 0,
+            username: "paras",
+            firstName: "paras",
+            lastName: "oli",
+            email: "paras.oli@gmail.com",
+            password: "paras",
+            phone: "9868757379",
+            userStatus: 0
+          }
+        ],
+      }).then((response) => {
+        expect(response.status).to.be.oneOf([200, 201]);
+        cy.log("Response body:", response.body);
+      });
+    });
   
     it("Update user", () => {
       cy.request({
@@ -59,3 +62,4 @@ describe("Swagger Petstore User API", () => {
       });
     });
   });
+  
